@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body class="bg-green-50 min-h-screen p-8 font-sans">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-4xl font-bold text-green-800 text-center mb-8">Famous Name Generator</h1>
+    
+    <div class="bg-green-100 p-6 rounded-lg shadow-md mb-8">
+      <div class="text-2xl font-semibold text-green-700 text-center mb-4" id="nameDisplay">Click to generate a name!</div>
+      <button onclick="generateName()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+        Generate Name
+      </button>
+    </div>
+
+    <div class="bg-green-100 p-6 rounded-lg shadow-md">
+      <h2 class="text-xl font-semibold text-green-800 mb-4">Name History</h2>
+      <ul id="nameHistory" class="space-y-2 text-green-700"></ul>
+    </div>
+  </div>
+
+  <script>
+    const famousNames = [
+      "Leonardo da Vinci",
+      "William Shakespeare",
+      "Albert Einstein",
+      "Marie Curie",
+      "Wolfgang Amadeus Mozart",
+      "Vincent van Gogh",
+      "Mahatma Gandhi",
+      "Nelson Mandela",
+      "Florence Nightingale",
+      "Charles Darwin",
+      "Frida Kahlo",
+      "Martin Luther King Jr.",
+      "Jane Austen",
+      "Pablo Picasso",
+      "Galileo Galilei",
+      "Mother Teresa",
+      "Ludwig van Beethoven",
+      "Isaac Newton",
+      "Rosa Parks",
+      "Leonardo DiCaprio",
+      "Meryl Streep",
+      "Muhammad Ali",
+      "Marie Antoinette",
+      "Cleopatra",
+      "Queen Victoria"
+    ];
+
+    const usedNames = new Set();
+    
+    function generateName() {
+      if (usedNames.size === famousNames.length) {
+        document.getElementById('nameDisplay').textContent = "All names have been generated!";
+        return;
+      }
+
+      let randomName;
+      do {
+        randomName = famousNames[Math.floor(Math.random() * famousNames.length)];
+      } while (usedNames.has(randomName));
+
+      usedNames.add(randomName);
+      
+      document.getElementById('nameDisplay').textContent = randomName;
+      
+      const historyItem = document.createElement('li');
+      historyItem.className = "bg-green-50 p-3 rounded-md";
+      historyItem.textContent = randomName;
+      
+      const historyList = document.getElementById('nameHistory');
+      historyList.insertBefore(historyItem, historyList.firstChild);
+    }
+  </script>
+</body>
+</html>
